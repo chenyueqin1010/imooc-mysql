@@ -1,0 +1,23 @@
+extends ../layout
+	
+block content
+	link(href="/public/css/user.css" rel="stylesheet")
+	#copperContainer
+		#wrapper
+			canvas#cropper
+			#previewContainer
+				canvas#preview180.preview
+				span.preview-span
+			button#saveBtn(onclick="saveImage()") 保存
+			a.cancel(href="javascript:") ×
+	.container
+		.row
+			h2 用户头像
+			.touxinag
+				img.imgData(src="/public/img/user.jpg",style="height:162px;")
+			br
+			a.btn.btn-primary(href="#",onclick="document.getElementById('input').click()") 修改头像
+				input(type="file",id="input",size="10",onchange="selectImage(this.files)")
+	script(src="/public/js/imagecropper.js")
+	script(src="/public/js/edit.js")
+				

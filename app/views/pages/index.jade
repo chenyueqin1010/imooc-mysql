@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+	.container
+		each cat in categories
+			.row
+				.panel.panel-primary
+					.panel-heading
+						h3.panel-title #{cat.name}
+							a.pull-right(href="categories/#{cat.value}",) 更多
+					.panel-body
+						each item in movies
+							if cat.value == item.category
+								.col-md-3
+									.thumbnail
+										a(target="_blank",href="/movie/#{item.id}")
+											img(src="#{item.poster}",alt="#item.title",style="height:350px;")
+										.caption.text-center
+											h4 #{item.title}
+											p: a.btn.btn-primary.btn-block(target="_blank",href="/movie/#{item.id}",role="button") 观看预告片
