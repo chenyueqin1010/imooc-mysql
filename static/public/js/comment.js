@@ -1,48 +1,56 @@
 $(function(){
 	var comment_id = null;
-	var user = sessionStorage.getItem('username');
+	var username = $('.saveComment').attr('name') || null;
+	var reply_to = null;
 	//回复
 	$('.reply').click(function(){
-		var reply_to = $(this).attr('to_user');
+		reply_to = $(this).attr('to_user');
 		comment_id = $(this).attr('comment_id');
-		sessionStorage.setItem('reply_to',reply_to);
+		if(username != reply_to){
+			$('.speakTo').text('回复 '+reply_to);
+			$('.cancelSpeakTo').removeClass('hide');
+		}else{
+			$('.speakTo').text('');
+			$('.cancelSpeakTo').addClass('hide');
+		}
 	});
+	
+	$('.cancelSpeakTo').click(function(){
+		reply_to = null;
+		$('.speakTo').text('');
+		$('.cancelSpeakTo').addClass('hide');
+	})
 	//评论
 	$('.saveComment').click(function(){
 		var movie_id = $('.movie_id').attr('movie_id');
-		var imgData = sessionStorage.getItem('imgData');
-		var to_user = sessionStorage.getItem('reply_to');
+		var imgData = $(this).attr('imgData');
+		var to_user = reply_to;
 		var content = $(this).prev().val().trim();
 		
-		if(user == to_user){
+		if(username == to_user){
 			to_user = null;
 		}
 		if(imgData == 'null'){
 			imgData = '/public/img/user.jpg';
 		}
-		if(user){
-			if(content != ''){
-				$.ajax({
-					type:"post",
-					url:"/user/comment",
-					data:{
-						'movie_id':movie_id,
-						'comment_id':comment_id,
-						'from_user':user,
-						'to_user':to_user,
-						'content':content,
-						'imgData':imgData
-					},
-					success:function(res){
-						sessionStorage.removeItem('reply_to');
-						window.location.reload();
-					}
-				});
-			}else{
-				alert('请输入内容!')
-			}
+		if(content != ''){
+			$.ajax({
+				type:"post",
+				url:"/user/comment",
+				data:{
+					'movie_id':movie_id,
+					'comment_id':comment_id,
+					'from_user':username,
+					'to_user':to_user,
+					'content':content,
+					'imgData':imgData
+				},
+				success:function(res){
+					window.location.reload();
+				}
+			});
 		}else{
-			alert('请登录后评论!')
+			alert('请输入内容!')
 		}
 	})
 	//点赞
@@ -52,9 +60,9 @@ $(function(){
 		var ups = $(this);
 		var comment_id = ups.attr('comment_id');
 		
-		if(!user){
+		if(!username){
 			alert('请先登录！');
-		}else if(comment_id.indexOf(user) != -1){
+		}else if(comment_id.indexOf(username) != -1){
 			alert('自己不能赞自己哦！');
 		}else{
 			var id = ups.attr('commentId');
@@ -73,7 +81,7 @@ $(function(){
 					'id':id,
 					'movie_id': movie_id,
 					'comment_id':comment_id,
-					'user':user
+					'user':username
 				},
 				dataType:'json',
 				success:function(res){}
@@ -82,14 +90,14 @@ $(function(){
 	})
 	
 //检测用户赞过的
-	if(movie_id && user){
+	if(movie_id && username){
 		$.ajax({
 			type: "post",
 			url: "/user/ups/check",
 			async: true,
 			data: {
 				'movie_id':movie_id,
-				'user': user
+				'user': username
 			},
 			dataType:'json',
 			success: function (result){

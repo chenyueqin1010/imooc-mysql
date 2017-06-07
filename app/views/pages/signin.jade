@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			form.loginForm1(method="post")
+				.body
+					.form-group
+						label(for="signinName1") 用户名
+						input#signinName1.form-control(type="text", name="user[name]", required)
+						p.text-danger.signinNameError1 
+					.form-group
+						label(for="signinPassword1") 密码
+						input#signinPassword1.form-control(type="password", name="user[password]", required)
+						p.text-danger#loginError1 		
+				.footer
+					button.btn.btn-success.btn-block.loginBtn(name="index") 登录
+					a.btn.btn-info.btn-block(href="/register") 注册
+					

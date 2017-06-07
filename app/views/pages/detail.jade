@@ -13,36 +13,47 @@ block content
 							each item in comments
 								li.media
 									.pull-left
-										if !item.to_user
-											a.comment.reply(href="#comments",to_user="#{item.from_user}",comment_id="#{item.comment_id}")
+										a.comment.reply(href="#comments",to_user="#{item.from_user}",comment_id="#{item.comment_id}")
+											if item.imgData
 												img.media-object(src="#{item.imgData}",style="width:32px;height:32px;")
+											else
+												img.media-object(src="/public/img/user.jpg",style="width:32px;height:32px;")
 									.media-body
-										if !item.to_user
-											h4.media-heading #{item.from_user}
-												span.pull-right(style="font-size:14px;color:#9E9E9E;") —— #{moment(item.createAt).format("YYYY/MM/DD HH:mm:ss")}
+										h4.media-heading #{item.from_user}
+											span.pull-right(style="font-size:14px;color:#9E9E9E;") —— #{moment(item.createAt).format("YYYY/MM/DD HH:mm:ss")}
 										p #{item.content}
 											br
 											if !item.to_user
 												a.btn.pull-right.glyphicon.glyphicon-thumbs-up(href="javascript:",comment_id=item.comment_id,movie_id=item.movie_id,commentId=item.id)  #{item.ups}
-										if item.to_user
-											.media(style="margin-left:32px;")
-												.pull-left
-													a.comment.reply(href="#comments",to_user="#{item.from_user}",comment_id="#{item.comment_id}")
-														img.media-object(src="#{item.imgData}",style="width:32px;height:32px;")
-												.media-body
-													h4.media-heading
-														span.pull-right(style="font-size:14px;color:#9E9E9E;") —— #{moment(item.createAt).format("YYYY/MM/DD HH:mm:ss")}
-														| #{item.from_user}
-														span.text-info &nbsp;回复&nbsp;
-														| #{item.to_user}
-													p #{item.reply_content}
+										if !item.reply_content
+											br
+										each reply in replys
+											if item.comment_id == reply.comment_id
+												.media
+													.pull-left
+														a.comment.reply(href="#comments",to_user="#{reply.from_user}",comment_id="#{reply.comment_id}")
+															if reply.imgData
+																img.media-object(src="#{reply.imgData}",style="width:32px;height:32px;")
+															else
+																img.media-object(src="/public/img/user.jpg",style="width:32px;height:32px;")
+													.media-body
+														h5.media-heading
+															span.pull-right(style="font-size:14px;color:#9E9E9E;") —— #{moment(reply.createAt).format("YYYY/MM/DD HH:mm:ss")}
+															| #{reply.from_user}
+															span.text-info &nbsp;回复&nbsp;
+															| #{reply.to_user}
+														p #{reply.reply_content}
 								hr
 							#comments
 								form
 									.form-group
 										span.text-muted.speakTo
+										a.cancelSpeakTo.hide(href="javascript:")   取消
 										textarea.form-control(row="3",style="resize:none;")
-										a.btn.btn-primary.saveComment(href="javascript:") 提交
+										if user
+											a.btn.btn-primary.saveComment(name="#{user.username}",imgData="#{user.imgData}", href="javascript:") 提交
+										else
+											a.btn.btn-link(href="#", data-toggle="modal", data-target="#signinModal") 请登录
 			.col-md-5
 				dl.dl-horizontal
 					input.movie_id(type="hidden",movie_id=movie.id)

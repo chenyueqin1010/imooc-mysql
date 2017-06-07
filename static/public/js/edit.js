@@ -1,10 +1,6 @@
 $(function(){
 	var cropper;
-	var username = sessionStorage.getItem('username');
-	
-	if(!username){
-		location.href="/";
-	}
+	var username = $('.userImg').attr('name');
 	
     function init() {
         //添加剪切和预览区域
@@ -23,7 +19,7 @@ $(function(){
     }
     //上传图片
     saveImage = function (){
-        var imgData = cropper.getCroppedImageData(180, 180);//自定义大小
+        var imgData = cropper.getCroppedImageData(100, 100);//自定义大小
         
         $.ajax({
         	type:"post",
@@ -34,7 +30,6 @@ $(function(){
         	},
         	dataType:'json',
         	success: function (data){
-        		sessionStorage.setItem('imgData',imgData);
         		location.reload();
         	}
         });

@@ -1,30 +1,31 @@
 extends ../layout
 
 block content
-	.container
-		.row
-			table.table.table-hover.table-bordered
-				thead
-					tr
-						th.text-center 电影名字
-						th.text-center 分类
-						th.text-center 导演
-						th.text-center 国家
-						th.text-center 上映年份
-						th.text-center 录入时间
-						th.text-center 查看
-						th.text-center 操作
-						th.text-center 删除
-				tbody
-					each item in movies
-						tr.text-center(class="item-id-#{item._id}")
-							td(style="vertical-align:middle") #{item.title}
-							td(style="vertical-align:middle") #{item.category}
-							td(style="vertical-align:middle") #{item.director}
-							td(style="vertical-align:middle") #{item.country}
-							td(style="vertical-align:middle") #{item.year}
-							td(style="vertical-align:middle") #{moment(item.createAt).format('YYYY-MM-DD HH:mm:ss')}
-							td(style="vertical-align:middle"): a(target="_blank",href="/movie/#{item.id}") 查看
-							td(style="vertical-align:middle"): a(target="_blank",href="../movie/update/#{item.id}") 修改
-							td(style="vertical-align:middle")
-								a.btn.btn-danger.del(type="button",href="../movie/delete/#{item.id}") 删除
+	if user && user.role >0
+		.container
+			.row
+				table.table.table-hover.table-bordered
+					thead
+						tr
+							th.text-center 电影名字
+							th.text-center 分类
+							th.text-center 导演
+							th.text-center 国家
+							th.text-center 上映年份
+							th.text-center 录入时间
+							th.text-center 查看
+							th.text-center 操作
+							th.text-center 删除
+					tbody
+						each item in movies
+							tr.text-center(class="item-id-#{item._id}")
+								td(style="vertical-align:middle") #{item.title}
+								td(style="vertical-align:middle") #{item.category}
+								td(style="vertical-align:middle") #{item.director}
+								td(style="vertical-align:middle") #{item.country}
+								td(style="vertical-align:middle") #{item.year}
+								td(style="vertical-align:middle") #{moment(item.createAt).format('YYYY-MM-DD HH:mm:ss')}
+								td(style="vertical-align:middle"): a(target="_blank",href="/movie/#{item.id}") 查看
+								td(style="vertical-align:middle"): a(target="_blank",href="../movie/update/#{item.id}") 修改
+								td(style="vertical-align:middle")
+									a.btn.btn-danger.del(type="button",href="../movie/delete/#{item.id}") 删除

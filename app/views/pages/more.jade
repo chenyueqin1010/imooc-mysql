@@ -4,7 +4,7 @@ block content
 	.container
 		.row
 			each item in movies
-				.col-md-3
+				.col-md-3.col-xs-6
 					.thumbnail
 						a(target="_blank",href="/movie/#{item.id}")
 							img(src="#{item.poster}",alt="#item.title",style="height:350px;")

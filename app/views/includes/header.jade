@@ -1,18 +1,30 @@
 .container
-	.row
+	.row.topRow
 		.col-xs-6
-			.admin
-				a.btn.btn-brank(href="/") 首页
-				a.btn.btn-brank(href="/list") 电影列表
-				a.btn.btn-brank(href="/admin") 电影录入
-				a.btn.btn-brank(href="/userlist") 用户列表
+			a.btn.btn-brank(href="/") 首页
+			each cat in categories
+				a.btn.btn-brank(href="/categories/#{cat.value}",) #{cat.name}
+			if user && user.role >0
+				span.dropdown
+					a#dropdownMenu1.btn.btn-blank.dropdown-toggle(type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="true") 后台管理
+					span.caret
+					ul.dropdown-menu(aria-labelledby="dropdownMenu1")
+						li
+							a(href="/list") 电影列表
+						li
+							a(href="/admin") 电影录入
+						li
+							a(href="/userlist") 用户列表
 		.col-xs-6.text-right
-			.loginUser
+			if locals.user
 				a(href="/user/edit")
-					img.img-circle.imgData(src="/public/img/user.jpg",style="height:28px;margin-right:5px;")
-					span.loginUserName
-					a.btn.btn-brank.logout(href="#1") 退出
-			.noUser
+					if user.imgData 
+						img.img-circle.imgData(src="#{user.imgData}",style="height:28px;margin-right:5px;")
+					else
+						img.img-circle.imgData(src="/public/img/user.jpg",style="height:28px;margin-right:5px;")
+					span #{user.username}
+				a.btn.btn-brank.logout(href="#1") 退出
+			else
 				a.btn.btn-brank(href="#", data-toggle="modal", data-target="#signinModal") 登录 
 				a.btn.btn-brank(href="#", data-toggle="modal", data-target="#signupModal") 注册
 	.row
@@ -32,11 +44,12 @@
 				.modal-body
 					.form-group
 						label(for="signinName") 用户名
-						input#signinName.form-control(type="text", name="user[name]", required) 			
+						input#signinName.form-control(type="text", name="user[name]", required)
+						p.text-danger.signinNameError
 					.form-group
 						label(for="signinPassword") 密码
 						input#signinPassword.form-control(type="password", name="user[password]", required)
-					p.text-danger#loginError
+						p.text-danger#loginError
 				.modal-footer
 					a.btn.btn-success.loginBtn 提交
 					button.btn.btn-default(type="button", data-dismiss="modal") 关闭
@@ -48,11 +61,26 @@
 				.modal-body
 					.form-group
 						label(for="signupName") 用户名
-						input#signupName.form-control(type="text", name="user[name]", required) 		
+							span.text-danger  *
+						input#signupName.form-control(type="text", name="user[name]", required) 
+						p.text-danger.signupNameError
 					.form-group
 						label(for="signupPassword") 密码
-						input#signupPassword.form-control(type="password", name="user[password]", required) 		
+							span.text-danger  *
+						input#signupPassword.form-control(type="password", name="user[password]", required) 
+						p.text-danger.signupPasswordError
+					.form-group
+						label(for="signuprPassword") 重复密码
+							span.text-danger  *
+						input#signuprPassword.form-control(type="password", required)
+						p.text-danger.signuprPasswordError
 				.modal-footer
-					button.btn.btn-success(type="submit") 提交
+					button.btn.btn-success.registerBtn(type="submit",disabled= true) 提交
 					button.btn.btn-default(type="button", data-dismiss="modal") 关闭
-			
+style.
+	.topRow{background:#337ab7;padding:8px 0;}
+	.topRow .caret,.topRow a{color:#fff;font-size:16px;}
+	.topRow a:hover{color:#e2e2e2;}
+	.topRow .caret{margin-left:-5px;}
+	.thumbnail .caption.text-center h4{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+	

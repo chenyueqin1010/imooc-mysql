@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			form(method="post", action="/user/signup")
+					.body
+						.form-group
+						label(for="signupName") 用户名
+							span.text-danger  *
+						input#signupName.form-control(type="text", name="user[name]", required) 
+						p.text-danger.signupNameError 
+					.form-group
+						label(for="signupPassword") 密码
+							span.text-danger  *
+						input#signupPassword.form-control(type="password", name="user[password]", required) 
+						p.text-danger.signupPasswordError 
+					.form-group
+						label(for="signuprPassword") 重复密码
+							span.text-danger  *
+						input#signuprPassword.form-control(type="password", required)
+						p.text-danger.signuprPasswordError 	
+					.footer
+						button.btn.btn-success.btn-block.registerBtn(type="submit",disabled= true) 提交
+						a.btn.btn-info.btn-block(type="button", href="/signin") 登录

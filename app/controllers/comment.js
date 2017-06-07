@@ -5,14 +5,21 @@ exports.new = function(req, res){
 	var c = req.body;
 	var createAt = new Date();
 	//insert
-	var sql = 'insert into comments(movie_id, comment_id, from_user, to_user, content,imgData,createAt) values(?,?, ?, ?, ?, ?, ?)';
+	var sql = 'insert into comments(movie_id, comment_id, from_user, content,imgData,createAt) values(?, ?, ?, ?, ?, ?)';
+	
 	if(!c.comment_id){
 		c.comment_id =new Date().getTime() + c.from_user;
 	}
+	
+	var data = [c.movie_id, c.comment_id, c.from_user, c.content, c.imgData,createAt];
+
 	if(c.to_user){
+		if(!c.imgData){
+			c.imgData = null;
+		}
 		sql = 'insert into comments(movie_id, comment_id, from_user, to_user, reply_content,imgData,createAt) values(?,?, ?, ?, ?, ?,?)';
+		data = [c.movie_id, c.comment_id, c.from_user, c.to_user, c.content, c.imgData,createAt];
 	}
-	var data = [c.movie_id, c.comment_id, c.from_user, c.to_user, c.content, c.imgData,createAt];
 	
 	connection.query(sql, data, function (err, result){
 		if(err){

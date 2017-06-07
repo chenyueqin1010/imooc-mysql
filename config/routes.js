@@ -2,9 +2,22 @@ var Index = require('../app/controllers/index');
 var Movie = require('../app/controllers/movie');
 var User = require('../app/controllers/user');
 var Comment = require('../app/controllers/comment');
+var connection = require('../app/models/connection');
+var bcrypt = require('bcrypt');//加密中间件
 
 //路由配置
 module.exports=function(app){
+	
+//分类列表
+	var sql_c = 'select * from categories';
+	connection.query(sql_c,function(err,categories){
+		app.locals.categories = categories;
+	})
+	
+	app.use(function(req, res, next){
+		app.locals.user = req.session.user || null;
+		next();
+	});
 	
 //movie
 	app.get('/', Index.index);
@@ -21,9 +34,11 @@ module.exports=function(app){
 	app.get('/userlist', User.list);
 	app.post('/user/signup', User.signup);
 	app.post('/user/signin', User.signin);
+	app.get('/user/logout', User.logout);
 	app.post('/user/delete', User.delete);
 	app.get('/user/edit', User.edit);
 	app.post('/user/upload/image',User.upload);
+	app.post('/user/checkName',User.checkName);
 	
 //comments
 	app.post('/user/comment',Comment.new);

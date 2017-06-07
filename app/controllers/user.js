@@ -5,15 +5,29 @@ var SALT_WORK_FACTOR = 10;
 //userlist
 exports.list = function(req,res){
     var  sql = 'SELECT * FROM users';
-	//电影查询
+    
 	connection.query(sql,function (err, users) {
     res.render('userlist',{
 			title: '用户列表页',//注意冒号后带空格
 			users: users
 		});
 	});
-
 }
+//checkName
+exports.checkName = function (req, res){
+	var username = req.body.username;
+	var sql = 'select id from users where username=?';
+	var data = username;
+	
+	connection.query(sql,data,function(err,result){
+		if(result.length == 0){
+			res.json('0');
+		}else{
+			res.json('1');
+		}
+	})
+}
+
 //signup
 exports.signup = function(req, res){
 	var user = req.body.user;
@@ -29,18 +43,19 @@ exports.signup = function(req, res){
 				if(err){
 					console.log(err.message);
 				}
-				res.redirect('/userlist');
+				res.redirect('/');
 			})
 		})
 	})
 }
+
 //signin
 exports.signin = function(req,res){
 	var user = req.body.user;
-	var sql = 'select * from users where username=?';
-	var data = user.name;
+	var sql_u = 'select * from users where username=?';
+	var data_u = user.name;
 			
-	connection.query(sql,data,function(err,result){
+	connection.query(sql_u,data_u,function(err,result){
 		if(result.length == 0){
 			res.json('none');//用户不存在
 			return;
@@ -48,6 +63,7 @@ exports.signin = function(req,res){
 		var db_password = result[0].password;
 		bcrypt.compare(user.password, db_password, function (err,isMatch){
 			if(isMatch){
+				req.session.user = result[0];
 				res.json(result[0]);
 				return;
 			}
@@ -56,6 +72,12 @@ exports.signin = function(req,res){
 		})
 	})
 }
+	
+//退出
+exports.logout = function (req,res){
+	req.session.destroy();
+}
+
 //delete
 exports.delete = function(req,res){
 	var id = req.body.id;
@@ -84,8 +106,8 @@ exports.upload = function(req,res){
 	
 	connection.query(sql_u, data, function (err, result){
 		connection.query(sql_c, data, function (err, result){
+			req.session.user.imgData = imgData;
 			res.json('upload success');
 		})
 	})
-	
 }
