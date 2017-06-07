@@ -51,8 +51,8 @@ $(function(){
 	})
 	
 	//check repeat password
-	$('#signuprPassword').change(function(){
-		 rpassword = $(this).val();
+	$('#signuprPassword').on('input',function(){
+       rpassword = $(this).val();
 		
 		if(rpassword.trim() == ''){
 			$('.signuprPasswordError').text('请重复密码');
@@ -65,7 +65,7 @@ $(function(){
 			checkRpassword = 1;
 			checkAll();
 		}
-	})
+    })
 	
 	checkAll = function(){
 		if(checkName == 1 && checkPassword == 1 && checkRpassword ==1){
