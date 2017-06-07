@@ -16,6 +16,7 @@ $(function(){
 					if(res == '1'){
 						$('.signupNameError').text('用户名已被使用');
 						checkName = 0;
+						checkAll();
 					}else if(res == '0'){
 						$('.signupNameError').text('');
 						checkName = 1;
@@ -26,17 +27,19 @@ $(function(){
 		}else{
 			$('.signupNameError').text('请输入用户名');
 			checkName = 0;
+			checkAll();
 		}
 		
 	})
 	
 	//check password
-	$('#signupPassword').blur(function(){
+	$('#signupPassword').on('input',function(){
 		password = $(this).val();
 		
 		if(password.trim() == ''){
 			$('.signupPasswordError').text('请输入密码');
 			checkPassword = 0;
+			checkAll();
 		}else if($('#signuprPassword').val().trim() != ''){
 			if(password != rpassword){
 				$('.signuprPasswordError').text('密码不一致');
@@ -57,9 +60,11 @@ $(function(){
 		if(rpassword.trim() == ''){
 			$('.signuprPasswordError').text('请重复密码');
 			checkRpassword = 0;
+			checkAll();
 		}else if(password != rpassword){
 			$('.signuprPasswordError').text('密码不一致');
 			checkRpassword = 0;
+			checkAll();
 		}else if(password == rpassword){
 			$('.signuprPasswordError').text('');
 			checkRpassword = 1;
@@ -69,7 +74,7 @@ $(function(){
 	
 	checkAll = function(){
 		if(checkName == 1 && checkPassword == 1 && checkRpassword ==1){
-			$('.registerBtn').removeAttr('disabled',false);
+			$('.registerBtn').removeAttr('disabled');
 		}else{
 			$('.registerBtn').attr('disabled',true);
 		}
