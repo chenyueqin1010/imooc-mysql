@@ -12,6 +12,7 @@ $(function(){
 		}else{
 			$('.speakTo').text('');
 			$('.cancelSpeakTo').addClass('hide');
+			comment_id = null;
 		}
 	});
 	
