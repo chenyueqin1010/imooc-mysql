@@ -15,9 +15,6 @@ app.use(express.static(path.join(__dirname,'static')));
 app.use(cookieParser());
 app.locals.moment = require('moment'); // 载入moment模块，格式化日期
 
-console.log('server started on 80 host');
-
-
 //前端源码美化
 if('development' === app.get('env')){
 	app.locals.pretty = true;
