@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "bcrypt": "^1.0.2",
-    "body-parser": "^1.17.1",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.3",
-    "express-session": "^1.15.3",
-    "jade": "^1.11.0",
-    "moment": "^2.18.1",
-    "mysql": "^2.13.0"
+    "bcrypt": "1.0.2",
+    "body-parser": "1.17.1",
+    "cookie-parser": "1.4.3",
+    "express": "4.15.3",
+    "express-session": "1.15.3",
+    "jade": "1.11.0",
+    "moment": "2.18.1",
+    "mysql": "2.13.0"
   },
   "engines": {
 		"node": "4.4.4",
