@@ -22,5 +22,8 @@ block content
 								td(style="vertical-align:middle") #{item.username}
 								td(style="vertical-align:middle") #{item.role}
 								td(style="vertical-align:middle")
-									button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
+									if item.role > 0
+										button.btn.btn-danger.del(type="button",data-id="#{item.id}", disabled) 删除
+									else
+										button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
 	script(src="/public/js/deleteuser.js")
