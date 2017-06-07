@@ -6,6 +6,8 @@ var connection = require('./app/models/connection');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
+app.set('port', (process.env.PORT || 5000));
+
 app.set('views','./app/views/pages');
 app.set('view engine','jade');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -13,7 +15,6 @@ app.use(express.static(path.join(__dirname,'static')));
 app.use(cookieParser());
 app.locals.moment = require('moment'); // 载入moment模块，格式化日期
 
-app.listen(8080);
 console.log('server started on 80 host');
 
 
@@ -29,3 +30,7 @@ app.use(session({
 }));
 
 require('./config/routes')(app);
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
