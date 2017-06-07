@@ -1,7 +1,6 @@
 {
 	"name": "fivemins",
 	"description": "five mins movie",
-	"version": "1.0",
 	"main": "app.js",
 	"dependencies": {
 		"bcrypt": "^1.0.2",
