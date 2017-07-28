@@ -2,10 +2,10 @@ var mysql  = require('mysql');
 
 //链接数据库
 var connection = mysql.createConnection({     
-  host     : 'sql9.freemysqlhosting.net',       
-  user     : 'sql9178856',              
-  password : 'QrxrQ42Igy',                        
-  database: 'sql9178856', 
+  host     : 'db4free.net',       
+  user     : 'andy1010',              
+  password : 'cyq450881',                        
+  database: 'imooc_db', 
 });
 connection.connect();
 
