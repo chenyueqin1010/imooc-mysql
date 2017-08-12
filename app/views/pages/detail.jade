@@ -5,7 +5,7 @@ block content
 		.row
 			.col-md-7
 				if user && user.count < 1
-					video(src=movie.flash,width="720",preload="metadata",controls,webkit-playsinline="",playsinline="",autoplay="autoplay") 无法播放，请升级浏览器！
+					video(src=movie.flash,width="720",preload="metadata",controls,webkit-playsinline="",playsinline="",autoplay="autoplay",poster="/public/img/loading.gif") 无法播放，请升级浏览器！
 				else if user
 					.mockVideo(style="padding:300px 360px;background:black;font-size:22px;color:white;white-space:nowrap;text-indent:-2em;") 账号无效！
 				else
