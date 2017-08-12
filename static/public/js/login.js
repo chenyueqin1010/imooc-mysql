@@ -36,8 +36,12 @@ $(function(){
 		$.ajax({
 			type:"get",
 			url:"/user/logout",
-			async:true
-		});
-		location.reload();
+			dataType:"json",
+			success: function(res){
+				if(res == '1'){
+					location.reload();
+				}
+			}
+		});		
 	})
 })

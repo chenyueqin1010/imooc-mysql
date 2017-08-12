@@ -87,6 +87,7 @@ exports.signin = function(req,res){
 //退出
 exports.logout = function (req,res){
 	req.session.destroy();
+	res.json('1');
 }
 
 //delete
