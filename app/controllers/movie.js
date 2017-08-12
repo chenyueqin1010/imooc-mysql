@@ -27,7 +27,7 @@ exports.admin = function(req,res){
 	
 	connection.query(sql,function(err,categories){
 	    res.render('admin',{
-			title: '五分钟电影——录入页',//注意冒号后带空格
+			title: '电影录入',//注意冒号后带空格
 			movie:{
 				title: '',
 				director: '',
@@ -51,7 +51,7 @@ exports.list = function(req,res){
           return;
         }
 	    res.render('list',{
-			title: '五分钟电影——列表页',//注意冒号后带空格
+			title: '电影管理',//注意冒号后带空格
 			movies: movies
 		});
 	});
@@ -92,7 +92,7 @@ exports.update = function(req,res){
 		connection.query(sql,function (err, movie) {
 			connection.query(sql2,function(err,categories){
 		      	res.render('admin',{
-					title: '电影修改页',//注意冒号后带空格
+					title: '影片修改',//注意冒号后带空格
 					movie: movie[0],
 					categories:categories
 				});

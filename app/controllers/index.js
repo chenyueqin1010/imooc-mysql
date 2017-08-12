@@ -6,7 +6,7 @@ exports.index = function(req,res){
 	//电影查询
 	connection.query(sql,function (err, movies) {
 	    res.render('index',{
-			title: '众乐电影网',//注意冒号后带空格
+			title: '好来屋影院',//注意冒号后带空格
 			movies: movies,
 		});
 	});
