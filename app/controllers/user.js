@@ -63,6 +63,17 @@ exports.signin = function(req,res){
 		var db_password = result[0].password;
 		bcrypt.compare(user.password, db_password, function (err,isMatch){
 			if(isMatch){
+				//改变count值
+				if(user.name != 'admin'){
+					var count = result[0].count + 1;
+					var sql_count = 'update users set count=? where username=?';
+					var data_count = [count,user.name];
+					
+					connection.query(sql_count,data_count,function (err) {
+				       
+					});
+				}
+				
 				req.session.user = result[0];
 				res.json(result[0]);
 				return;
