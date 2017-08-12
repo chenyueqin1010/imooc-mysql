@@ -44,9 +44,4 @@ $(function(){
 			}
 		});		
 	})
-	
-	var detailUnsign = $('.detailUnsign');
-	if(detailUnsign){
-		$('#signinModal').modal('show');
-	}
 })

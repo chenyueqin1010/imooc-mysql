@@ -2,6 +2,11 @@ $(function(){
 	var comment_id = null;
 	var username = $('.saveComment').attr('name') || null;
 	var reply_to = null;
+	//未登录跳出登录框
+	var detailUnsign = $('.detailUnsign');
+	if(detailUnsign){
+		$('#signinModal').modal('show');
+	}
 	//回复
 	$('.reply').click(function(){
 		reply_to = $(this).attr('to_user');
