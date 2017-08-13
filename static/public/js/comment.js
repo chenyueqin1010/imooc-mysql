@@ -5,7 +5,7 @@ $(function(){
 	//未登录跳出登录框
 	var detailUnsign = $('.detailUnsign');
 	var detailSign =$('.detailSign');
-	if(detailUnsign && !detailSign){
+	if(detailUnsign && detailSign != undefined){
 		$('#signinModal').modal('show');
 	}
 	//回复
