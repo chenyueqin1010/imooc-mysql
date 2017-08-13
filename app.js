@@ -25,7 +25,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
 	 cookie:{
-            maxAge: 10000 // default session expiration is set to 1 hour
+            maxAge: 1000*60*60 // default session expiration is set to 1 hour
         }
 }));
 
