@@ -12,6 +12,7 @@ block content
 							th.text-center.test 头像
 							th.text-center 用户名
 							th.text-center ROLE
+							th.text-center COUNT
 							th.text-center 删除
 					tbody
 						each item in users
@@ -23,6 +24,7 @@ block content
 										img(src="/public/img/user.jpg",style="height:32px;")
 								td(style="vertical-align:middle") #{item.username}
 								td(style="vertical-align:middle") #{item.role}
+								td(style="vertical-align:middle") #{item.count}
 								td(style="vertical-align:middle")
 									if item.role > 0
 										button.btn.btn-danger.del(type="button",data-id="#{item.id}", disabled) 删除
