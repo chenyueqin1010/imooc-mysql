@@ -9,7 +9,7 @@ exports.list = function(req,res){
 	var offset = (page-1) * rows;
 	var result = array();
 
-	var rs = "select count(*) from users";
+	var rs = "select * from users";
 	
 	connection.query(rs,function(err,result){
 		var users = result;
