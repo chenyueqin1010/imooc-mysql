@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+	link(rel="stylesheet" href="/public/css/easyui.css")
+	link(rel="stylesheet" href="/public/css/icon.css")
+	if user && user.role >0
+		.container
+			.row
+				table.table.table-hover.table-bordered
+					thead
+						tr
+							th.text-center.test 头像
+							th.text-center 用户名
+							th.text-center ROLE
+							th.text-center 删除
+					tbody
+						each item in users
+							tr.text-center(class="item-id-#{item.id}")
+								td(style="vertical-align:middle")
+									if item.imgData
+										img(src=item.imgData,style="height:32px;")
+									else
+										img(src="/public/img/user.jpg",style="height:32px;")
+								td(style="vertical-align:middle") #{item.username}
+								td(style="vertical-align:middle") #{item.role}
+								td(style="vertical-align:middle")
+									if item.role > 0
+										button.btn.btn-danger.del(type="button",data-id="#{item.id}", disabled) 删除
+									else
+										button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
+	script(src="/jquery/dist/jquery.easyui.min.js")
+	script(src="/jquery/dist/easyui-lang-zh_CN.js")			
+	script(src="/public/js/userlist.js")
