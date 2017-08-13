@@ -4,7 +4,11 @@ var SALT_WORK_FACTOR = 10;
 
 //userlist
 exports.list = function(req,res){
-	$page = req.body.page ? req.body.page : 1;
+	res.render('userlist',{
+			title: '用户列表页'//注意冒号后带空格
+			//users: users
+		});
+	/* $page = req.body.page ? req.body.page : 1;
 	$rows = req.body.rows ? req.body.rows : 10;
 	$offset = ($page-1)*$rows;
 	$result = array();
@@ -17,7 +21,7 @@ exports.list = function(req,res){
 			title: '用户列表页'//注意冒号后带空格
 			users: users
 		});
-	})
+	}) */
 	/* $rs = connectionquery("select * from users limit $offset,$rows");
 	
 	$items = array();
