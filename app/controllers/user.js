@@ -9,10 +9,16 @@ exports.list = function(req,res){
 	$offset = ($page-1)*$rows;
 	$result = array();
 
-	$rs = connection.query("select count(*) from users");
-	$row = connection.fetch.row($rs);
-	$result["total"] = $row[0];
-	$rs = connectionquery("select * from users limit $offset,$rows");
+	$rs = "select count(*) from users";
+	
+	connection.query($rs,function(err,result){
+		var users = result[0];
+		res.render('userlist',{
+			title: '用户列表页'//注意冒号后带空格
+			users: users
+		});
+	})
+	/* $rs = connectionquery("select * from users limit $offset,$rows");
 	
 	$items = array();
 	while($row = connection.fetch.object($rs)){
@@ -20,15 +26,12 @@ exports.list = function(req,res){
 	}
 	$result["rows"] = $items;
 
-	res.json($result);
+	res.json($result); */
 	
     //var  sql = 'SELECT * FROM users';
     
 
-	res.render('userlist',{
-			title: '用户列表页'//注意冒号后带空格
-			//users: users
-		});
+	
 
 }
 //checkName
