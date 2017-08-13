@@ -31,7 +31,7 @@ $(function(){
 			dataType: 'json',
 			success: function(res){
 				if(res == '1'){
-					$('#dg').datagrid('reload');
+					location.reload();
 				}
 			}
 		});
