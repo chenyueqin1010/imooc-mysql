@@ -4,10 +4,10 @@ var SALT_WORK_FACTOR = 10;
 
 //userlist
 exports.list = function(req,res){
-	var page = req.body.page ? req.body.page : 1;
+	/* var page = req.body.page ? req.body.page : 1;
 	var rows = req.body.rows ? req.body.rows : 10;
 	var offset = (page-1) * rows;
-	var result = array();
+	var result = array(); */
 
 	var rs = "select * from users";
 	
