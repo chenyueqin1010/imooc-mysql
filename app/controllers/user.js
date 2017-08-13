@@ -9,14 +9,14 @@ exports.list = function(req,res){
 	$offset = ($page-1)*$rows;
 	$result = array();
 
-	$rs = mysql_query("select count(*) from users");
-	$row = mysql_fetch_row($rs);
+	$rs = connection.query("select count(*) from users");
+	$row = connection.fetch.row($rs);
 	$result["total"] = $row[0];
-	$rs = mysql_query("select * from users limit $offset,$rows");
+	$rs = connectionquery("select * from users limit $offset,$rows");
 	
 	$items = array();
-	while($row = mysql_fetch_object($rs)){
-		array_push($items, $row);
+	while($row = connection.fetch.object($rs)){
+		array.push($items, $row);
 	}
 	$result["rows"] = $items;
 
