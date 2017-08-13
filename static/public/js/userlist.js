@@ -7,7 +7,7 @@ $(function(){
 			{field:'username',title:'用户名',width:100,align:'center'},
 			{field:'role',title:'ROLE',width:100,align:'center'},
 			{field:'count',title:'COUNT',width:100,align:'center'},
-			{field:'action',title:'操作',width:100,align:'center',formatter="formatAction"}
+			{field:'action',title:'操作',width:100,align:'center',formatter:"formatAction"}
 		]]
 	});
 	
