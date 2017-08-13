@@ -8,7 +8,7 @@ $(function(){
 			url:"/user/delete",
 			data:{
 				'id':id
-			}
+			},
 			dataType: 'json',
 			success: function(res){
 				if(res == '1'){
