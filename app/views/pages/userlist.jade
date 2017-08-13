@@ -1,5 +1,7 @@
 extends ../layout
 
+link(rel="stylesheet", href="/public/css/test.css")
+
 block content
 	if user && user.role >0
 		.container
@@ -7,7 +9,7 @@ block content
 				table.table.table-hover.table-bordered
 					thead
 						tr
-							th.text-center 头像
+							th.text-center.test 头像
 							th.text-center 用户名
 							th.text-center ROLE
 							th.text-center 删除
@@ -26,4 +28,6 @@ block content
 										button.btn.btn-danger.del(type="button",data-id="#{item.id}", disabled) 删除
 									else
 										button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
+	script(src="/jquery/dist/jquery.easyui.min.js")
+	script(src="/jquery/dist/easyui-lang-zh_CN.js")			
 	script(src="/public/js/deleteuser.js")
