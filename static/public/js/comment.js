@@ -4,8 +4,8 @@ $(function(){
 	var reply_to = null;
 	//未登录跳出登录框
 	var detailUnsign = $('.detailUnsign');
-	var detailSign =$('.detailSign');
-	if(detailUnsign && detailSign != undefined){
+	var detailSign = $('.detailSign');
+	if(detailUnsign && detailSign == undefined){
 		$('#signinModal').modal('show');
 	}
 	//回复
