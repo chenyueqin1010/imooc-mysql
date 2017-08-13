@@ -9,13 +9,13 @@ exports.list = function(req,res){
 	var offset = (page-1) * rows;
 	var result = array(); */
 
-	var rs = "select * from users";
+	var sql_all = "select * from users";
 	
-	connection.query(rs,function(err,result){
+	connection.query(sql_all,function(err,result){
 		var users = result;
+		res.json(users);
 		res.render('userlist',{
-			title: '用户列表页',//注意冒号后带空格
-			users: users
+			title: '用户列表页'//注意冒号后带空格
 		});
 	}) 
 	/* $rs = connectionquery("select * from users limit $offset,$rows");
