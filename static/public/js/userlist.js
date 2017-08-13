@@ -1,6 +1,6 @@
 $(function(){
 	//加载列表
-	$('#dg').datagrid({
+	/* $('#dg').datagrid({
 		url:'/user/list',
 		columns:[[
 			{field:'imgData',title:'头像',width:100,align:'center'},
@@ -9,7 +9,7 @@ $(function(){
 			{field:'count',title:'COUNT',width:100,align:'center'},
 			{field:'action',title:'操作',width:100,align:'center',formatter:"formatAction"}
 		]]
-	});
+	}); */
 	
 	//		操作列
 	function formatAction(){
