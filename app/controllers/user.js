@@ -4,35 +4,14 @@ var SALT_WORK_FACTOR = 10;
 
 //userlist
 exports.list = function(req,res){
-	/* var page = req.body.page ? req.body.page : 1;
-	var rows = req.body.rows ? req.body.rows : 10;
-	var offset = (page-1) * rows;
-	var result = array(); */
-
-	var sql_all = "select * from users";
-	
-	connection.query(sql_all,function(err,result){
-		var users = result;
-		res.json(users);
-		res.render('userlist',{
-			title: '用户列表页'//注意冒号后带空格
-		});
-	}) 
-	/* $rs = connectionquery("select * from users limit $offset,$rows");
-	
-	$items = array();
-	while($row = connection.fetch.object($rs)){
-		array.push($items, $row);
-	}
-	$result["rows"] = $items;
-
-	res.json($result); */
-	
-    //var  sql = 'SELECT * FROM users';
+    var  sql = 'SELECT * FROM users';
     
-
-	
-
+	connection.query(sql,function (err, users) {
+    res.render('userlist',{
+			title: '用户列表页',//注意冒号后带空格
+			users: users
+		});
+	});
 }
 //checkName
 exports.checkName = function (req, res){
@@ -85,7 +64,7 @@ exports.signin = function(req,res){
 		bcrypt.compare(user.password, db_password, function (err,isMatch){
 			if(isMatch){
 				//改变count值
-				if(result[0].role != 100){
+				if(user.name != 'admin'){
 					var count = result[0].count + 1;
 					var sql_count = 'update users set count=? where username=?';
 					var data_count = [count,user.name];
