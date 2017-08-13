@@ -23,7 +23,10 @@ if('development' === app.get('env')){
 app.use(session({
     secret: 'imooc',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+	 cookie:{
+            maxAge: 10000 // default session expiration is set to 1 hour
+        }
 }));
 
 require('./config/routes')(app);
