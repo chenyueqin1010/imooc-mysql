@@ -4,7 +4,7 @@ var SALT_WORK_FACTOR = 10;
 
 //userlist
 exports.list = function(req,res){
-	/$page = req.body.page ? req.body.page : 1;
+	$page = req.body.page ? req.body.page : 1;
 	$rows = req.body.rows ? req.body.rows : 10;
 	$offset = ($page-1)*$rows;
 	$result = array();
