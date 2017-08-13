@@ -4,14 +4,14 @@ var SALT_WORK_FACTOR = 10;
 
 //userlist
 exports.list = function(req,res){
-	$page = req.body.page ? req.body.page : 1;
-	$rows = req.body.rows ? req.body.rows : 10;
-	$offset = ($page-1)*$rows;
-	$result = array();
+	page = req.body.page ? req.body.page : 1;
+	rows = req.body.rows ? req.body.rows : 10;
+	offset = (page-1) * rows;
+	result = array();
 
-	$rs = "select count(*) from users";
+	rs = "select count(*) from users";
 	
-	connection.query($rs,function(err,result){
+	connection.query(rs,function(err,result){
 		var users = result[0];
 		res.render('userlist',{
 			title: '用户列表页',//注意冒号后带空格
