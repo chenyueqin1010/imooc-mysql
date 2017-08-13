@@ -96,9 +96,7 @@ exports.delete = function(req,res){
 	var sql = 'delete from users where id='+id;
 	
 	connection.query(sql,function(err,result){
-		if(err){
-			console.log(err.message);
-		}
+		res.json('1');
 	})
 }
 

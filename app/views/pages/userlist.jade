@@ -1,7 +1,8 @@
 extends ../layout
 
 block content
-	link(rel="stylesheet" href="/public/css/test.css")
+	link(rel="stylesheet" href="/public/css/easyui.css")
+	link(rel="stylesheet" href="/public/css/icon.css")
 	if user && user.role >0
 		.container
 			.row
@@ -29,4 +30,4 @@ block content
 										button.btn.btn-danger.del(type="button",data-id="#{item.id}") 删除
 	script(src="/jquery/dist/jquery.easyui.min.js")
 	script(src="/jquery/dist/easyui-lang-zh_CN.js")			
-	script(src="/public/js/deleteuser.js")
+	script(src="/public/js/userlist.js")
