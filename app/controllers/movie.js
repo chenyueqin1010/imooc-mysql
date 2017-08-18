@@ -65,6 +65,7 @@ exports.save = function(req,res){
 	//insert
 		var sql = 'insert into movies(title,director,country,poster,year,flash,summary,createAt,category) values(?,?,?,?,?,?,?,?,?)';
 		var createAt = new Date();
+		createAt.setHours(createAt.getHours()+8);
 		var data = [m.title,m.director,m.country,m.poster,m.year,m.flash,m.summary,createAt,m.category];
 		
 		connection.query(sql,data,function (err,result) {
