@@ -4,6 +4,7 @@ var connection = require('../models/connection');
 exports.new = function(req, res){
 	var c = req.body;
 	var createAt = new Date();
+	createAt.setHours(createAt.getHours()+8);
 	//insert
 	var sql = 'insert into comments(movie_id, comment_id, from_user, content,imgData,createAt) values(?, ?, ?, ?, ?, ?)';
 	
